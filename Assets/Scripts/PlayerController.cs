@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    //Movement
     [SerializeField] private float speed = 5f;
     private Rigidbody2D rb;
+
+    //Shooting
+    [SerializeField] private GameObject shotPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public void Inputs()
     {
         Move();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
 
     }
 
@@ -34,6 +42,12 @@ public class PlayerController : MonoBehaviour
         rb.velocity = newVelocity * speed;
 
 
+    }
+
+    public void Shoot()
+    {
+        GameObject shot = Instantiate(shotPrefab, transform.position, transform.rotation);
+        
     }
 
 }
