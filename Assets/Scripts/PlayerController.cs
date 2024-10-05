@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private int life = 3;
 
     //Movement
     [SerializeField] private float speed = 5f;
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     //Shooting
     [SerializeField] private GameObject shotPrefab;
+    [SerializeField] private Transform shotPoint;
+    [SerializeField] private GameObject explosionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +49,18 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject shot = Instantiate(shotPrefab, transform.position, transform.rotation);
-        
+        Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
+
+    }
+
+    public void OnDamage(int damage)
+    {
+        life -= damage;
+        if (life <= 0)
+        {
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
 }

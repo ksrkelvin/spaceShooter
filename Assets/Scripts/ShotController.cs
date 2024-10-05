@@ -7,7 +7,8 @@ public class ShotController : MonoBehaviour
 {
 
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float lifeTime = 2f;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private GameObject shotImpactPrefab;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,20 @@ public class ShotController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(gameObject);
+        Instantiate(shotImpactPrefab, transform.position, transform.rotation);
+
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().OnDamage(damage);
+        }
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerController>().OnDamage(damage);
+        }
+
+        
+
+        
     }
 
 }
