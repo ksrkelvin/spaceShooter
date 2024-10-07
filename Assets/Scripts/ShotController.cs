@@ -6,7 +6,6 @@ using UnityEngine;
 public class ShotController : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 5f;
     [SerializeField] private int damage = 1;
     [SerializeField] private GameObject shotImpactPrefab;
     private Rigidbody2D rb;
@@ -15,19 +14,13 @@ public class ShotController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        //Colocado no start, pois a velocidade do tiro é constante
-        Shooting();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    public void Shooting()
-    {
-        rb.velocity = new Vector2(0, speed);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

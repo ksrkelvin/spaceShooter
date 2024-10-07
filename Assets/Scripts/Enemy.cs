@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float fireRate = 1f;
     [SerializeField] protected GameObject explosionPrefab;
-    [SerializeField] protected Transform shotPoint;
+
     [SerializeField] protected GameObject shotPrefab;
 
     // Start is called before the first frame update
@@ -34,6 +34,15 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Instantiate(explosionPrefab, transform.position, transform.rotation);
 
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
         }
     }
 

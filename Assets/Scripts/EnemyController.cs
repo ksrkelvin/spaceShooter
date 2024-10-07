@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyController : Enemy
 {
     private Rigidbody2D rb;
-    
+
+    [SerializeField] protected Transform shotPoint;
+    [SerializeField] private float shotSpeed = 5f;
     private float fire;
 
     // Start is called before the first frame update
@@ -41,7 +43,8 @@ public class EnemyController : Enemy
             fire -= Time.deltaTime;
             if (fire <= 0)
             {
-                Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
+                var enemyShot = Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
+                enemyShot.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -shotSpeed);
                 fire = Random.Range(fireRate, 2 * fireRate);
             }
 

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject shotPrefab;
     [SerializeField] private Transform shotPoint;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private float shotSpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,17 +25,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Inputs();
-    }
-
-    public void Inputs()
-    {
         Move();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
-
+        Shoot();
     }
 
     public void Move()
@@ -49,8 +41,11 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            var playerShot  = Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
+            playerShot.GetComponent<Rigidbody2D>().velocity = new Vector2(0, shotSpeed);
+        }
     }
 
     public void OnDamage(int damage)
