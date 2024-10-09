@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject explosionPrefab;
 
     [SerializeField] protected GameObject shotPrefab;
+    [SerializeField] protected int xp;
 
     // Start is called before the first frame update
     void Start()
@@ -28,21 +30,42 @@ public class Enemy : MonoBehaviour
     //Receive damage
     public void OnDamage(int damage)
     {
-        life -= damage;
-        if (life <= 0)
+        if (transform.position.y <= 5f)
         {
-            Destroy(gameObject);
-            Instantiate(explosionPrefab, transform.position, transform.rotation);
+            life -= damage;
+            if (life <= 0)
+            {
+                Destroy(gameObject);
+                Instantiate(explosionPrefab, transform.position, transform.rotation);
 
+                EnemyGen enemyGen = FindObjectOfType<EnemyGen>();
+                enemyGen.RemoveEnemy();
+                enemyGen.AddXP(xp);
+            }
         }
+
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject);
             Instantiate(explosionPrefab, transform.position, transform.rotation);
+            EnemyGen enemyGen = FindObjectOfType<EnemyGen>();
+            enemyGen.RemoveEnemy();
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
+            EnemyGen enemyGen = FindObjectOfType<EnemyGen>();
+            enemyGen.RemoveEnemy();
+            collision.gameObject.GetComponent<PlayerController>().OnDamage(1);
+
         }
     }
 

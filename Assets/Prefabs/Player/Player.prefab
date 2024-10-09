@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,7 +44,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012975589449969128}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -110,11 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea0d91b752ad58bfb2c5b993675c34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 3
+  life: 100
   speed: 5
   shotPrefab: {fileID: 1658851006734009957, guid: 442e53cd36caa2e74b4aed3425caf3cd, type: 3}
   shotPoint: {fileID: 1042272134222265455}
   explosionPrefab: {fileID: 5264934063023239737, guid: 507ca3c51a5ea4cfca0037dbba9bf088, type: 3}
+  shotSpeed: 5
 --- !u!1 &4497681672665304179
 GameObject:
   m_ObjectHideFlags: 0

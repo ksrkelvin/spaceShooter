@@ -198,11 +198,11 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018051863, y: -0.22570285}
-  m_Size: {x: 0.72865677, y: 0.8730715}
+  m_Offset: {x: 0, y: -0.25566626}
+  m_Size: {x: 0.72865677, y: 0.8953037}
   m_Direction: 0
 --- !u!114 &6031735039596267939
 MonoBehaviour:
@@ -217,12 +217,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 5
-  speed: 0
-  fireRate: 3
+  speed: 1
+  fireRate: 5
   explosionPrefab: {fileID: 5264934063023239737, guid: 507ca3c51a5ea4cfca0037dbba9bf088, type: 3}
   shotPrefab: {fileID: 4693087441787139992, guid: 4fe62209705b6c4b0b0d0e2b45a67fcf, type: 3}
+  xp: 25
   shotPoint: {fileID: 3615649685939813663}
   shotSpeed: 5
+  yLimit: 2.5
 --- !u!1 &5479235290810981232
 GameObject:
   m_ObjectHideFlags: 0
