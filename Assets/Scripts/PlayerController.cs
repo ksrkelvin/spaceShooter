@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int life = 3;
+    [SerializeField] private int shotLevel = 1;
 
     //Movement
+    [SerializeField] private float xLimit = 8.3f;
+    [SerializeField] private float yLimit = 4.4f;
     [SerializeField] private float speed = 5f;
     private Rigidbody2D rb;
 
     //Shooting
     [SerializeField] private GameObject shotPrefab;
+    [SerializeField] private GameObject shot2Prefab;
     [SerializeField] private Transform shotPoint;
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private float shotSpeed = 5f;
@@ -31,11 +35,14 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-
         Vector2 newVelocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         newVelocity.Normalize();
         rb.velocity = newVelocity * speed;
 
+        float x = Mathf.Clamp(transform.position.x, -xLimit, xLimit);
+        float y = Mathf.Clamp(transform.position.y, -yLimit, yLimit);
+
+        transform.position = new Vector2(x, y);
 
     }
 

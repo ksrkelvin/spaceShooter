@@ -51,4 +51,5 @@ MonoBehaviour:
   maxSpawnYPos: 14
   maxSpawnXPos: 8
   maxSpawnEnemy: 3
-  level: 3
+  enemyCount: 0
+  level: 1
