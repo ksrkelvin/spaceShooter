@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,9 +51,41 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            var playerShot  = Instantiate(shotPrefab, shotPoint.position, shotPoint.rotation);
-            playerShot.GetComponent<Rigidbody2D>().velocity = new Vector2(0, shotSpeed);
+            switch (shotLevel)
+            {
+                case 1:
+                    SetShot(shotPrefab, shotPoint.position);
+                    break;
+
+                case 2:
+                    SetShot(shotPrefab, transform.position + new Vector3(0.5f, 0.1f, 0));
+                    SetShot(shotPrefab, transform.position + new Vector3(-0.5f, 0.1f, 0));
+                    break;
+                case 3:
+                    SetShot(shotPrefab, transform.position + new Vector3(0.5f, 0.1f, 0));
+                    SetShot(shot2Prefab, transform.position + new Vector3(0, 0.2f, 0));
+                    SetShot(shotPrefab, transform.position + new Vector3(-0.5f, 0.1f, 0));
+                    break;
+                case 4:
+                    SetShot(shot2Prefab, transform.position + new Vector3(0.5f, 0.1f, 0));
+                    SetShot(shotPrefab, transform.position + new Vector3(0, 0.2f, 0));
+                    SetShot(shot2Prefab, transform.position + new Vector3(-0.5f, 0.1f, 0));
+                    break;
+                case 5:
+                    SetShot(shot2Prefab, transform.position + new Vector3(0.5f, 0.1f, 0));
+                    SetShot(shot2Prefab, transform.position + new Vector3(0, 0.2f, 0));
+                    SetShot(shot2Prefab, transform.position + new Vector3(-0.5f, 0.1f, 0));
+                    break;
+
+            }
+
         }
+    }
+
+    private void SetShot(GameObject shotPrefeb, Vector3 position)
+    {
+        var shot = Instantiate(shotPrefeb, position, transform.rotation);
+        shot.GetComponent<Rigidbody2D>().velocity = new Vector2(0, shotSpeed);
     }
 
     public void OnDamage(int damage)
